@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'posts', component: PostComponent },
   { path: 'list-post', component: ListPostComponent },
   { path: 'add-post', component: AddPostComponent },
-  { path: '**', pathMatch: '**', redirectTo: '/posts/posts' },
+  { path: '**', pathMatch: '**', redirectTo: '/posts/list-post' },
 ];
 
 @NgModule({

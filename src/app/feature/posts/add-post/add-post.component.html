@@ -2,26 +2,33 @@
   <div class="row">
     <div class="col-md-4  offset-md-4">
 
-      <form>
+      <form [formGroup]="formPost" (ngSubmit)="addPost()">
+
+        <!-- userId -->
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Id usuario</label>
-          <input type="area" class="form-control" id="exampleInputPassword1">
+          <input formControlName="userId" type="area" class="form-control" id="exampleInputPassword1" required>
+          <div *ngIf="formPost.get('userId')?.errors?.required && formPost.get('userId')?.touched" class="form-text text-danger">Ingresa el ID del usuario.</div>
+          <div *ngIf="formPost.get('userId')?.errors?.pattern" class="form-text text-danger">Solo Numeros.</div>
         </div>
+
+        <!-- title -->
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Titulo</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          <input formControlName="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+          <div *ngIf="formPost.get('title')?.errors?.required && formPost.get('title')?.touched" class="form-text text-danger">Ingresa el titulo del Post.</div>
+          <div *ngIf="formPost.get('title')?.errors?.pattern" class="form-text text-danger">Solo Letras.</div>
         </div>
+
+        <!-- body -->
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Leyenda</label>
-          <textarea class="form-control" placeholder="Texto del post..." id="floatingTextarea2" style="height: 100px"></textarea>
-          <!-- <input type="text-area" class="form-control" id="exampleInputPassword1"> -->
+          <textarea formControlName="body" class="form-control" placeholder="Texto del post..." id="floatingTextarea2" style="height: 100px" required></textarea>
+          <div *ngIf="formPost.get('body')?.errors?.required && formPost.get('body')?.touched" class="form-text text-danger">Ingresa el cuerpo del Post.</div>
+          <div *ngIf="formPost.get('body')?.errors?.pattern" class="form-text text-danger">Solo Letras.</div>
         </div>
-        <!-- <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
-        <button type="submit" class="btn btn-primary">Agregar</button>
+
+        <button [disabled]="formPost.invalid" type="submit" class="btn btn-primary">Guardar</button>
       </form>
 
     </div>
